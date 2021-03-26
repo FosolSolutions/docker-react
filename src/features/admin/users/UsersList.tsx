@@ -6,7 +6,7 @@ import { IUser } from 'store/features/users';
  * @returns Users list component.
  */
 export const UsersList = () => {
-  const usersStore = { users: [] }; //useAppSelector(state => state.users);
+  const usersStore = useAppSelector(state => state.users);
 
   return (
     <div>
