@@ -1,5 +1,5 @@
 import { useAppSelector } from 'store';
-import { IUser } from 'store/features/users';
+import { IUser, usersReducer } from 'store/features/users';
 
 /**
  * UsersList component provides a way to view a list of users.
@@ -32,7 +32,7 @@ const Rows = (users: IUser[]) => {
  */
 const UserRow = (user: IUser) => {
   return (
-    <div>
+    <div key={user.key}>
       <div>{user.username}</div>
       <div>{user.email}</div>
     </div>
