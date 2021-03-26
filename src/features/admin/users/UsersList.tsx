@@ -19,11 +19,9 @@ const user: IUser = {
 export const UsersList = () => {
   const dispatch = useAppDispatch();
   const usersStore = useAppSelector((state) => state.users);
-  const [count, setCount] = React.useState(usersStore.users.length);
 
   const onAdd = () => {
-    const id = count + 1;
-    setCount(id);
+    const id = usersStore.users.length + 1;
     console.log(id);
     dispatch(addUser({ ...user, id }));
   };
@@ -34,26 +32,42 @@ export const UsersList = () => {
       <div>
         <button onClick={onAdd}>Add</button>
       </div>
-      <div>{Rows(usersStore.users)}</div>
+      <div>
+        <Rows users={usersStore.users} />
+      </div>
     </div>
   );
 };
+
+interface IRowProps {
+  users: IUser[];
+}
 
 /**
  *
  * @param users
  * @returns
  */
-const Rows = (users: IUser[]) => {
-  return users.map((u) => UserRow(u));
+const Rows: React.FC<IRowProps> = ({ users }) => {
+  return (
+    <>
+      {users.map((u) => (
+        <UserRow user={u} />
+      ))}
+    </>
+  );
 };
+
+interface IUserRowProps {
+  user: IUser;
+}
 
 /**
  *
  * @param user
  * @returns
  */
-const UserRow = (user: IUser) => {
+const UserRow: React.FC<IUserRowProps> = ({ user }) => {
   const dispatch = useAppDispatch();
 
   const onRemove = (e: any, id: number) => {
@@ -62,7 +76,7 @@ const UserRow = (user: IUser) => {
   };
 
   return (
-    <div key={user.key}>
+    <div key={user.id}>
       <div>{user.username}</div>
       <div>{user.email}</div>
       <div>
