@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// eslint-disable-next-line prettier/prettier
-import type { RootState } from '../../store';
+import { RootState } from '../../store';
 import { IUser, IUsersStore } from '.';
 
 // Define the initial state using that type
