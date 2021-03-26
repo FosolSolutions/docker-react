@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // eslint-disable-next-line prettier/prettier
-import type { RootState } from '../../store'
+import type { RootState } from '../../store';
 import { IUser, IUsersStore } from '.';
 
 // Define the initial state using that type
@@ -14,23 +14,23 @@ const initialState: IUsersStore = {
       email: 'email@test.com',
       firstName: 'first',
       lastName: 'last',
-      isDisabled: false
-    }
-  ]
-}
+      isDisabled: false,
+    },
+  ],
+};
 
 export const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
     add: (state: IUsersStore, action: PayloadAction<IUser>) => {
-        state.users = [...state.users, action.payload];
+      state.users = [...state.users, action.payload];
     },
     remove: (state: IUsersStore, action: PayloadAction<IUser>) => {
-        state.users = state.users.filter(u => u.id !== action.payload.id);
+      state.users = state.users.filter((u) => u.id !== action.payload.id);
     },
-  }
-})
+  },
+});
 
 export const { add, remove } = usersSlice.actions;
 

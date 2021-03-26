@@ -1,26 +1,26 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // eslint-disable-next-line prettier/prettier
-import type { RootState } from '../../store'
+import type { RootState } from '../../store';
 import { IRole, IRolesStore } from '.';
 
 // Define the initial state using that type
 const initialState: IRolesStore = {
   total: 0,
-  roles: []
-}
+  roles: [],
+};
 
 export const rolesSlice = createSlice({
   name: 'roles',
   initialState,
   reducers: {
     add: (state: IRolesStore, action: PayloadAction<IRole>) => {
-        state.roles = [...state.roles, action.payload];
+      state.roles = [...state.roles, action.payload];
     },
     remove: (state: IRolesStore, action: PayloadAction<IRole>) => {
-        state.roles = state.roles.filter(r => r.id !== action.payload.id);
+      state.roles = state.roles.filter((r) => r.id !== action.payload.id);
     },
-  }
-})
+  },
+});
 
 export const { add, remove } = rolesSlice.actions;
 
