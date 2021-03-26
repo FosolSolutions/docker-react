@@ -1,0 +1,39 @@
+.App {
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.App header {
+  background-color: #282c34;
+  min-height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App main {
+  justify-content: normal;
+}
+
+.App footer {
+  color: darkgrey;
+}
+
+.App footer hr {
+  margin: 0px;
+}
+
+.App footer div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+hr {
+  border-top: 1px solid grey;
+}

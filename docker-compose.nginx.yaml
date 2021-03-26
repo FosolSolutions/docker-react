@@ -1,0 +1,30 @@
+version: "3.5"
+
+services:
+  ####################### Web App #######################
+  app:
+    stdin_open: true
+    tty: true
+    restart: on-failure:1
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    volumes:
+      - app-node-cache:/usr/app/node_modules
+    ports:
+      - "3000:8080"
+    env_file: ./.env
+    networks:
+      - app-net
+
+####################### Networks Definition #######################
+networks:
+  app-net:
+    name: app-net
+    driver: bridge
+
+####################### Volumes Definition #######################
+volumes:
+  app-node-cache:
+    name: app-node-cache
