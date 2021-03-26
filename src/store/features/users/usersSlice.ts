@@ -5,17 +5,7 @@ import { IUser, IUsersStore } from '.';
 // Define the initial state using that type
 const initialState: IUsersStore = {
   total: 0,
-  users: [
-    {
-      id: 1,
-      key: 'test',
-      username: 'name',
-      email: 'email@test.com',
-      firstName: 'first',
-      lastName: 'last',
-      isDisabled: false,
-    },
-  ],
+  users: [],
 };
 
 export const usersSlice = createSlice({
