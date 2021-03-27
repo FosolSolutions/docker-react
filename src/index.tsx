@@ -1,3 +1,4 @@
+import 'react-app-polyfill/stable';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -5,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './store';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 const Index = () => {

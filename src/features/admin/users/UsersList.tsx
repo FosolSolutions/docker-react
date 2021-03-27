@@ -1,6 +1,11 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
 import { useAppSelector, useAppDispatch } from 'store';
-import { add as addUser, remove as removeUser, IUser } from 'store/features/users';
+import { add as addUser, IUser } from 'store/features/users';
+import { UserRows } from './UserRows';
+import Row from 'react-bootstrap/esm/Row';
+import Col from 'react-bootstrap/esm/Col';
 
 const user: IUser = {
   id: 1,
@@ -21,69 +26,35 @@ export const UsersList = () => {
   const usersStore = useAppSelector((state) => state.users);
 
   const onAdd = () => {
-    const id = usersStore.users.length + 1;
+    const id = generateId(usersStore.users);
     console.log(id);
     dispatch(addUser({ ...user, id }));
   };
 
   return (
-    <div>
-      Users
-      <div>
-        <button onClick={onAdd}>Add</button>
-      </div>
-      <div>
-        <Rows users={usersStore.users} />
-      </div>
-    </div>
+    <Container>
+      <Row>
+        <Col>
+          <h1>Users</h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Button onClick={onAdd}>Add</Button>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Container className="table">
+            <UserRows users={usersStore.users} />
+          </Container>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
-interface IRowProps {
-  users: IUser[];
-}
-
-/**
- *
- * @param users
- * @returns
- */
-const Rows: React.FC<IRowProps> = ({ users }) => {
-  return (
-    <>
-      {users.map((u) => (
-        <UserRow user={u} />
-      ))}
-    </>
-  );
-};
-
-interface IUserRowProps {
-  user: IUser;
-}
-
-/**
- *
- * @param user
- * @returns
- */
-const UserRow: React.FC<IUserRowProps> = ({ user }) => {
-  const dispatch = useAppDispatch();
-
-  const onRemove = (e: any, id: number) => {
-    e.preventDefault();
-    dispatch(removeUser({ ...user, id }));
-  };
-
-  return (
-    <div key={user.id}>
-      <div>{user.username}</div>
-      <div>{user.email}</div>
-      <div>
-        <a href="void" onClick={(e) => onRemove(e, user.id)}>
-          remove
-        </a>
-      </div>
-    </div>
-  );
+const generateId = (users: IUser[]): number => {
+  if (!users || !users.length) return 1;
+  return users[users.length - 1].id + 1;
 };

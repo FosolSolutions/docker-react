@@ -16,8 +16,15 @@
   color: white;
 }
 
+.App nav {
+  display: flex;
+  align-items: flex-start;
+}
+
 .App main {
+  display: flex;
   justify-content: normal;
+  margin-bottom: auto;
 }
 
 .App footer {
@@ -37,4 +44,8 @@
 hr {
   border-top: 1px solid grey;
   border-bottom: 0px;
+}
+
+.table .row:nth-child(even) {
+  background: #eee;
 }
