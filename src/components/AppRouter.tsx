@@ -1,3 +1,4 @@
+import React from 'react';
 import { Nav } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { UsersList } from 'features/admin/users';

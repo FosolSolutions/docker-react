@@ -1,7 +1,7 @@
 import React from 'react';
 import Col from 'react-bootstrap/esm/Col';
 import { useAppDispatch } from 'store';
-import { IRole, remove as removeRole } from 'store/features/roles';
+import { IRole, remove as removeRole } from 'store/slices/roles';
 
 interface IRoleColumnsProps {
   role: IRole;
@@ -9,10 +9,10 @@ interface IRoleColumnsProps {
 
 /**
  *
- * @param Role
+ * @param role
  * @returns
  */
-export const RoleColumns: React.FC<IRoleColumnsProps> = ({ role }) => {
+export const RoleColumns: React.FC<IRoleColumnsProps> = ({ role }: IRoleColumnsProps) => {
   const dispatch = useAppDispatch();
 
   const onRemove = (e: any, id: number) => {

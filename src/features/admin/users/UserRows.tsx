@@ -1,7 +1,7 @@
 import React from 'react';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
-import { IUser } from 'store/features/users';
+import { IUser } from 'store/slices/users';
 import { UserColumns } from './UserColumns';
 import styled from 'styled-components';
 
@@ -14,7 +14,7 @@ interface IUserRowsProps {
  * @param users
  * @returns
  */
-export const UserRows: React.FC<IUserRowsProps> = ({ users }) => {
+export const UserRows: React.FC<IUserRowsProps> = ({ users }: IUserRowsProps) => {
   return (
     <>
       <Row>

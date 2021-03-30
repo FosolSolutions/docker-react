@@ -8,10 +8,16 @@ const initialState: IUsersStore = {
   users: [],
 };
 
+/**
+ * Reducers and Actions for users.
+ */
 export const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
+    fetch: (state: IUsersStore, action: PayloadAction<IUser[]>) => {
+      state.users = action.payload;
+    },
     add: (state: IUsersStore, action: PayloadAction<IUser>) => {
       state.users = [...state.users, action.payload];
     },
@@ -21,7 +27,8 @@ export const usersSlice = createSlice({
   },
 });
 
-export const { add, remove } = usersSlice.actions;
+// Export all the actions for the reducers.
+export const { fetch, add, remove } = usersSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const usersState = (state: RootState) => state.users;

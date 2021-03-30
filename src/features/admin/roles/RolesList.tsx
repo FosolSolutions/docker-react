@@ -1,7 +1,8 @@
+import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import { useAppSelector, useAppDispatch } from 'store';
-import { add as addRole, IRole } from 'store/features/roles';
+import { add as addRole, IRole } from 'store/slices/roles';
 import { RoleRows } from './RoleRows';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';

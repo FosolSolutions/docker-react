@@ -1,7 +1,8 @@
+import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import { useAppSelector, useAppDispatch } from 'store';
-import { add as addUser, IUser } from 'store/features/users';
+import { add as addUser, IUser } from 'store/slices/users';
 import { UserRows } from './UserRows';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';

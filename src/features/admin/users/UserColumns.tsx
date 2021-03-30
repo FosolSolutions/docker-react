@@ -1,7 +1,7 @@
 import React from 'react';
 import Col from 'react-bootstrap/esm/Col';
 import { useAppDispatch } from 'store';
-import { IUser, remove as removeUser } from 'store/features/users';
+import { IUser, remove as removeUser } from 'store/slices/users';
 
 interface IUserColumnsProps {
   user: IUser;
@@ -12,7 +12,7 @@ interface IUserColumnsProps {
  * @param user
  * @returns
  */
-export const UserColumns: React.FC<IUserColumnsProps> = ({ user }) => {
+export const UserColumns: React.FC<IUserColumnsProps> = ({ user }: IUserColumnsProps) => {
   const dispatch = useAppDispatch();
 
   const onRemove = (e: any, id: number) => {

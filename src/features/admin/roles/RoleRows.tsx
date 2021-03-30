@@ -1,7 +1,7 @@
 import React from 'react';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
-import { IRole } from 'store/features/roles';
+import { IRole } from 'store/slices/roles';
 import { RoleColumns } from './RoleColumns';
 import styled from 'styled-components';
 
@@ -11,10 +11,10 @@ interface IRoleRowsProps {
 
 /**
  *
- * @param Roles
+ * @param roles
  * @returns
  */
-export const RoleRows: React.FC<IRoleRowsProps> = ({ roles }) => {
+export const RoleRows: React.FC<IRoleRowsProps> = ({ roles }: IRoleRowsProps) => {
   return (
     <>
       <Row>

@@ -1,3 +1,4 @@
+import React from 'react';
 import { AppRouter, Header, Footer } from './components';
 import './App.css';
 

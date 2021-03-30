@@ -1,9 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { rolesReducer } from './features/roles';
-import { usersReducer } from './features/users';
+import { appReducers } from './slices/app';
+import { rolesReducer } from './slices/roles';
+import { usersReducer } from './slices/users';
 
+/**
+ * Application store and reducers.
+ */
 export const store = configureStore({
   reducer: {
+    app: appReducers,
     users: usersReducer,
     roles: rolesReducer,
   },
