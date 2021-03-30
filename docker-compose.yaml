@@ -1,4 +1,4 @@
-version: "3.5"
+version: '3.5'
 
 services:
   ####################### Web App #######################
@@ -14,8 +14,26 @@ services:
       - ./public:/usr/app/public
       - app-node-cache:/usr/app/node_modules
     ports:
-      - "3000:3000"
+      - '3000:3000'
     env_file: ./.env
+    networks:
+      - app-net
+
+  ####################### Web App #######################
+  api:
+    stdin_open: true
+    tty: true
+    restart: on-failure:1
+    container_name: api
+    build:
+      context: api/express
+    volumes:
+      - ./api/express/src:/usr/app/src
+      - ./api/express/nodemon.json:/usr/app/nodemon.json
+      - api-node-cache:/usr/app/node_modules
+    ports:
+      - '3001:80'
+    env_file: api/express/.env
     networks:
       - app-net
 
@@ -29,3 +47,5 @@ networks:
 volumes:
   app-node-cache:
     name: app-node-cache
+  api-node-cache:
+    name: api-node-cache

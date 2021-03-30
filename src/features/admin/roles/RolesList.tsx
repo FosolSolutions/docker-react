@@ -1,40 +1,37 @@
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import { useAppSelector, useAppDispatch } from 'store';
-import { add as addUser, IUser } from 'store/features/users';
-import { UserRows } from './UserRows';
+import { add as addRole, IRole } from 'store/features/roles';
+import { RoleRows } from './RoleRows';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
 
-const user: IUser = {
+const role: IRole = {
   id: 1,
   key: 'key',
-  username: 'username',
-  email: 'email',
-  firstName: 'first',
-  lastName: 'last',
+  name: 'role',
   isDisabled: false,
 };
 
 /**
- * UsersList component provides a way to view a list of users.
- * @returns Users list component.
+ * RolesList component provides a way to view a list of Roles.
+ * @returns Roles list component.
  */
-export const UsersList = () => {
+export const RolesList = () => {
   const dispatch = useAppDispatch();
-  const usersStore = useAppSelector((state) => state.users);
+  const rolesStore = useAppSelector((state) => state.roles);
 
   const onAdd = () => {
-    const id = generateId(usersStore.users);
+    const id = generateId(rolesStore.roles);
     console.log(id);
-    dispatch(addUser({ ...user, id }));
+    dispatch(addRole({ ...role, id }));
   };
 
   return (
     <Container>
       <Row>
         <Col>
-          <h1>Users</h1>
+          <h1>Roles</h1>
         </Col>
       </Row>
       <Row>
@@ -45,7 +42,7 @@ export const UsersList = () => {
       <Row>
         <Col>
           <Container className="table">
-            <UserRows users={usersStore.users} />
+            <RoleRows roles={rolesStore.roles} />
           </Container>
         </Col>
       </Row>
@@ -53,7 +50,7 @@ export const UsersList = () => {
   );
 };
 
-const generateId = (users: IUser[]): number => {
-  if (!users || !users.length) return 1;
-  return users[users.length - 1].id + 1;
+const generateId = (roles: IRole[]): number => {
+  if (!roles || !roles.length) return 1;
+  return roles[roles.length - 1].id + 1;
 };

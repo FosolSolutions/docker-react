@@ -19,5 +19,9 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "paths": {
+    "@store/*": ["src/store/*"],
+    "@features/*": ["src/features/*"]
+  }
 }
