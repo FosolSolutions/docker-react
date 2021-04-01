@@ -8,7 +8,8 @@ export const router = express.Router();
  * Return a page of users.
  */
 router.get('/users', (req, res) => {
-  const { page, qty } = req.query;
+  const { page, qty, error } = req.query;
+  if (error) res.status(400).json({ message: 'Forced error' });
   const users = getPage(
     db.users,
     parseInt(page?.toString() ?? '1'),

@@ -40,6 +40,11 @@ app.get('/cors', (req, res) => {
   res.send(envCors);
 });
 app.use('/', defaultRouter);
+app.use('[./]*/error/:error', (req, res) => {
+  res
+    .status(parseInt(req.params.error))
+    .json({ message: req.query.message ?? 'This is a forced error' });
+});
 app.use('/admin', usersRouter);
 
 app.listen(port);
