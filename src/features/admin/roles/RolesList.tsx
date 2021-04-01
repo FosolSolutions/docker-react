@@ -1,8 +1,7 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-import { useAppSelector, useAppDispatch } from 'store';
-import { add as addRole, IRole } from 'store/slices/roles';
+import { useAppSelector, useAppDispatch, addRole, IRole } from 'store';
 import { RoleRows } from './RoleRows';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
@@ -24,7 +23,6 @@ export const RolesList = () => {
 
   const onAdd = () => {
     const id = generateId(rolesStore.roles);
-    console.log(id);
     dispatch(addRole({ ...role, id }));
   };
 

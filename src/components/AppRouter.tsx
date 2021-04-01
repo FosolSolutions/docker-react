@@ -3,6 +3,7 @@ import { Nav } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { UsersList } from 'features/admin/users';
 import { RolesList } from 'features/admin/roles';
+import { Overlay } from '../components';
 
 export const AppRouter = () => {
   return (
@@ -27,6 +28,7 @@ export const AppRouter = () => {
         </Nav>
       </nav>
       <main>
+        <Overlay message="Content is being loaded"></Overlay>
         <Switch>
           <Route path="/admin/users">
             <UsersList></UsersList>
@@ -42,3 +44,5 @@ export const AppRouter = () => {
     </Router>
   );
 };
+
+export default AppRouter;

@@ -13,16 +13,16 @@ export const rolesSlice = createSlice({
   name: 'roles',
   initialState,
   reducers: {
-    add: (state: IRolesStore, action: PayloadAction<IRole>) => {
+    addRole: (state: IRolesStore, action: PayloadAction<IRole>) => {
       state.roles = [...state.roles, action.payload];
     },
-    remove: (state: IRolesStore, action: PayloadAction<IRole>) => {
+    removeRole: (state: IRolesStore, action: PayloadAction<IRole>) => {
       state.roles = state.roles.filter((r) => r.id !== action.payload.id);
     },
   },
 });
 
-export const { add, remove } = rolesSlice.actions;
+export const { addRole, removeRole } = rolesSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const RolesState = (state: RootState) => state.roles;

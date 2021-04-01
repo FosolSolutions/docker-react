@@ -26,7 +26,7 @@ export const appSlice = createSlice({
 });
 
 // Export all the actions for the reducers.
-export const { onRequest } = appSlice.actions;
+export const { onRequest, onResponse } = appSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const appState = (state: RootState) => state.app;

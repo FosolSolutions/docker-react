@@ -1,8 +1,7 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-import { useAppSelector, useAppDispatch } from 'store';
-import { add as addUser, IUser } from 'store/slices/users';
+import { useAppSelector, IUser, useUsers } from 'store';
 import { UserRows } from './UserRows';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
@@ -22,14 +21,16 @@ const user: IUser = {
  * @returns Users list component.
  */
 export const UsersList = () => {
-  const dispatch = useAppDispatch();
+  const { fetchUsers, addUser } = useUsers();
   const usersStore = useAppSelector((state) => state.users);
 
   const onAdd = () => {
-    const id = generateId(usersStore.users);
-    console.log(id);
-    dispatch(addUser({ ...user, id }));
+    addUser(user);
   };
+
+  React.useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
 
   return (
     <Container>
@@ -52,9 +53,4 @@ export const UsersList = () => {
       </Row>
     </Container>
   );
-};
-
-const generateId = (users: IUser[]): number => {
-  if (!users || !users.length) return 1;
-  return users[users.length - 1].id + 1;
 };

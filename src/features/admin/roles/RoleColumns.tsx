@@ -1,7 +1,6 @@
 import React from 'react';
 import Col from 'react-bootstrap/esm/Col';
-import { useAppDispatch } from 'store';
-import { IRole, remove as removeRole } from 'store/slices/roles';
+import { useAppDispatch, IRole, removeRole } from 'store';
 
 interface IRoleColumnsProps {
   role: IRole;

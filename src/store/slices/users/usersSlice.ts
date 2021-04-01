@@ -15,20 +15,27 @@ export const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-    fetch: (state: IUsersStore, action: PayloadAction<IUser[]>) => {
+    fetchUsers: (state: IUsersStore, action: PayloadAction<IUser[]>) => {
       state.users = action.payload;
     },
-    add: (state: IUsersStore, action: PayloadAction<IUser>) => {
+    addUser: (state: IUsersStore, action: PayloadAction<IUser>) => {
       state.users = [...state.users, action.payload];
     },
-    remove: (state: IUsersStore, action: PayloadAction<IUser>) => {
+    updateUser: (state: IUsersStore, action: PayloadAction<IUser>) => {
+      const index = state.users.findIndex((u) => u.id === action.payload.id);
+      if (index >= 0) {
+        state.users = state.users.slice(index);
+        state.users[index] = action.payload;
+      }
+    },
+    removeUser: (state: IUsersStore, action: PayloadAction<IUser>) => {
       state.users = state.users.filter((u) => u.id !== action.payload.id);
     },
   },
 });
 
 // Export all the actions for the reducers.
-export const { fetch, add, remove } = usersSlice.actions;
+export const { fetchUsers, addUser, updateUser, removeUser } = usersSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const usersState = (state: RootState) => state.users;

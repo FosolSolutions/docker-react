@@ -20,3 +20,5 @@ export const users = [
     rowVersion: '324234d',
   },
 ];
+
+export default users;

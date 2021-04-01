@@ -1,7 +1,6 @@
 import React from 'react';
 import Col from 'react-bootstrap/esm/Col';
-import { useAppDispatch } from 'store';
-import { IUser, remove as removeUser } from 'store/slices/users';
+import { IUser, useUsers } from 'store';
 
 interface IUserColumnsProps {
   user: IUser;
@@ -13,11 +12,11 @@ interface IUserColumnsProps {
  * @returns
  */
 export const UserColumns: React.FC<IUserColumnsProps> = ({ user }: IUserColumnsProps) => {
-  const dispatch = useAppDispatch();
+  const { removeUser } = useUsers();
 
-  const onRemove = (e: any, id: number) => {
+  const onRemove = (e: any) => {
     e.preventDefault();
-    dispatch(removeUser({ ...user, id }));
+    removeUser(user);
   };
 
   return (
@@ -27,7 +26,7 @@ export const UserColumns: React.FC<IUserColumnsProps> = ({ user }: IUserColumnsP
       <Col>{user.lastName}</Col>
       <Col>{user.firstName}</Col>
       <Col>
-        <a href="void" onClick={(e) => onRemove(e, user.id)}>
+        <a href="void" onClick={(e) => onRemove(e)}>
           remove
         </a>
       </Col>
