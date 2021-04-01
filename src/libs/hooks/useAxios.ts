@@ -2,6 +2,12 @@ import axios, { AxiosRequestConfig } from 'axios';
 import React from 'react';
 import { useAppDispatch, onRequest, onResponse, onError } from 'store';
 
+/**
+ * Provides a consistent way to handle requests with axios.
+ * Triggers events and state changes to identify loading, progress and errors.
+ * @param config
+ * @returns
+ */
 export const useAxios = (config?: AxiosRequestConfig) => {
   const dispatch = useAppDispatch();
 

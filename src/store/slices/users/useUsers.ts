@@ -16,9 +16,7 @@ export const useUsers = () => {
    */
   const fetch = React.useCallback(async () => {
     return await api
-      .get<IUser[]>({
-        url: '/admin/users',
-      })
+      .get<IUser[]>('/admin/users')
       .then((res) => {
         dispatch(fetchUsers(res.data));
         return res.data;
@@ -35,10 +33,7 @@ export const useUsers = () => {
   const add = React.useCallback(
     async (user: IUser) => {
       return await api
-        .post<IUser>({
-          url: '/admin/users',
-          data: user,
-        })
+        .post<IUser>('/admin/users', { data: user })
         .then((res) => {
           dispatch(addUser(res.data));
           return res.data;
@@ -54,10 +49,7 @@ export const useUsers = () => {
   const update = React.useCallback(
     async (user: IUser) => {
       return await api
-        .put<IUser>({
-          url: `/admin/users/${user.id}`,
-          data: user,
-        })
+        .put<IUser>(`/admin/users/${user.id}`, { data: user })
         .then((res) => {
           dispatch(updateUser(res.data));
           return res.data;
@@ -73,10 +65,7 @@ export const useUsers = () => {
   const remove = React.useCallback(
     async (user: IUser) => {
       return await api
-        .delete<IUser>({
-          url: `/admin/users/${user.id}`,
-          data: user,
-        })
+        .delete<IUser>(`/admin/users/${user.id}`, { data: user })
         .then((res) => {
           dispatch(removeUser(res.data));
           return res.data;
