@@ -54,6 +54,8 @@ docker-compose -f docker-compose.nginx.yaml up -d
 
 There a scripts to help setup and maintain the docker containers.
 
-| Name    | Command                | Description                                                                                                         |
-| ------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Rebuild | `./scripts/rebuild.sh` | Rebuild and refresh the volume containing the `node_modules`. This is required when the `package.json` is modified. |
+| Name    | Command                    | Description                                                                                                             |
+| ------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Rebuild | `./scripts/rebuild.sh`     | Rebuild and refresh the volumes containing the `node_modules`. This is required when the `package.json` is modified.    |
+| Rebuild | `./scripts/rebuild-app.sh` | Rebuild and refresh the app volume containing the `node_modules`. This is required when the `package.json` is modified. |
+| Rebuild | `./scripts/rebuild-api.sh` | Rebuild and refresh the api volume containing the `node_modules`. This is required when the `package.json` is modified. |
