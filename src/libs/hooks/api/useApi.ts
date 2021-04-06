@@ -1,4 +1,4 @@
-import { useAxios } from '.';
+import { useAxios } from '..';
 
 /**
  * Provides a consistent way to handle requests with axios.

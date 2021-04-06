@@ -1,3 +1,3 @@
 export * from './useAxios';
-export * from './useApi';
-export * from './useApiAdminUsers';
+export * from './api';
+export * from './api';

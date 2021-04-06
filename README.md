@@ -2,60 +2,21 @@
 
 React web application running in Docker container with Typescript.
 
-## Create React App
+This repo provides basic examples of a redux toolkit implementation that abstracts and simplifies API integration.
 
-More information [here](https://reactjs.org/docs/create-a-new-react-app.html).
+## Folder Structure
 
-```bash
-npx create-react-app {app name}
-```
+| Path              | Description                                            |
+| ----------------- | ------------------------------------------------------ |
+| `/src`            | React application source code.                         |
+| `/src/components` | Common shared components.                              |
+| `/src/store`      | Application Redux store, actions, reducers, slices.    |
+| `/src/libs`       | Common utility library code.                           |
+| `/src/libs/hooks` | Common shared hooks, specifically axios and api hooks. |
+| `/src/features`   | Application feature components.                        |
 
-## Node Docker
+## Additional Documentation
 
-The default docker images will update automatically when changes are made to the `/src`.
-
-To build the docker image.
-
-```bash
-docker build -t {image name} .
-# or
-docker-compose build
-```
-
-To run the docker image.
-
-```bash
-docker run {image name}
-# or
-docker-compose up -d
-```
-
-## Nginx Docker
-
-A production docker image using Nginx serving compiled static React files.
-
-To build the docker image.
-
-```bash
-docker build -t {image name} -f Dockerfile.nginx .
-# or
-docker-compose -f docker-compose.nginx.yaml build
-```
-
-To run the docker image.
-
-```bash
-docker run -p 3000:8080 {image name}
-# or
-docker-compose -f docker-compose.nginx.yaml up -d
-```
-
-## Scripts
-
-There a scripts to help setup and maintain the docker containers.
-
-| Name    | Command                    | Description                                                                                                             |
-| ------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Rebuild | `./scripts/rebuild.sh`     | Rebuild and refresh the volumes containing the `node_modules`. This is required when the `package.json` is modified.    |
-| Rebuild | `./scripts/rebuild-app.sh` | Rebuild and refresh the app volume containing the `node_modules`. This is required when the `package.json` is modified. |
-| Rebuild | `./scripts/rebuild-api.sh` | Rebuild and refresh the api volume containing the `node_modules`. This is required when the `package.json` is modified. |
+- [Setup](docs/setup.md)
+- [React](docs/React.md)
+- [Redux](docs/Redux.md)
