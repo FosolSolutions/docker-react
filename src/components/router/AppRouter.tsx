@@ -1,9 +1,10 @@
 import React from 'react';
 import { Nav } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { UsersList } from 'features/admin/users';
+import { UsersList, UserInfo } from 'features/admin/users';
 import { RolesList } from 'features/admin/roles';
-import { Overlay } from '../components';
+import { Overlay } from '..';
+import EditUserRoute from './EditUserRoute';
 
 export const AppRouter = () => {
   return (
@@ -30,12 +31,10 @@ export const AppRouter = () => {
       <main>
         <Overlay message="Content is being loaded"></Overlay>
         <Switch>
-          <Route path="/admin/users">
-            <UsersList></UsersList>
-          </Route>
-          <Route path="/admin/roles">
-            <RolesList></RolesList>
-          </Route>
+          <Route path="/admin/users/0" component={UserInfo}></Route>
+          <Route path="/admin/users/:id" component={EditUserRoute}></Route>
+          <Route path="/admin/users" component={UsersList}></Route>
+          <Route path="/admin/roles" component={RolesList}></Route>
           <Route path="/">
             <div>Home</div>
           </Route>

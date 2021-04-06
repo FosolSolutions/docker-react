@@ -10,3 +10,5 @@ export const useApi = () => {
 
   return axios;
 };
+
+export default useApi;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useApi } from '../../../libs/hooks';
+import { useApiAdminUsers } from 'libs/hooks';
 import { useAppDispatch, fetchUsers, addUser, updateUser, removeUser, IUser } from 'store';
 
 /**
@@ -8,72 +8,73 @@ import { useAppDispatch, fetchUsers, addUser, updateUser, removeUser, IUser } fr
  * @returns userUsers hook.
  */
 export const useUsers = () => {
-  const api = useApi();
+  const api = useApiAdminUsers();
   const dispatch = useAppDispatch();
 
   /**
    * Make a request to fetch a page of users.
+   * Update redux with successful results.
    */
   const fetch = React.useCallback(async () => {
-    return await api
-      .get<IUser[]>('/admin/users')
-      .then((res) => {
-        dispatch(fetchUsers(res.data));
-        return res.data;
-      })
-      .catch(() => {
-        dispatch(fetchUsers([]));
-        return [];
-      });
+    return await api.getUsersPaged().then((res) => {
+      dispatch(fetchUsers(res.data));
+      return res.data;
+    });
   }, [dispatch, api]);
 
   /**
+   * Make a request for a user with the specified 'id'.
+   */
+  const get = React.useCallback(
+    async (id: number) => {
+      return await api.getUser(id).then((res) => {
+        return res.data;
+      });
+    },
+    [api],
+  );
+
+  /**
    * Make a request to add a user to the datasource.
+   * Update redux with successful results.
    */
   const add = React.useCallback(
     async (user: IUser) => {
-      return await api
-        .post<IUser>('/admin/users', { data: user })
-        .then((res) => {
-          dispatch(addUser(res.data));
-          return res.data;
-        })
-        .catch(() => {});
+      return await api.postUser(user).then((res) => {
+        dispatch(addUser(res.data));
+        return res.data;
+      });
     },
     [dispatch, api],
   );
 
   /**
    * Make a request to add a user to the datasource.
+   * Update redux with successful results.
    */
   const update = React.useCallback(
     async (user: IUser) => {
-      return await api
-        .put<IUser>(`/admin/users/${user.id}`, { data: user })
-        .then((res) => {
-          dispatch(updateUser(res.data));
-          return res.data;
-        })
-        .catch(() => {});
+      return await api.putUser(user).then((res) => {
+        dispatch(updateUser(res.data));
+        return res.data;
+      });
     },
     [dispatch, api],
   );
 
   /**
    * Make a request to remove a user from the datasource.
+   * Update redux with successful results.
    */
   const remove = React.useCallback(
     async (user: IUser) => {
-      return await api
-        .delete<IUser>(`/admin/users/${user.id}`, { data: user })
-        .then((res) => {
-          dispatch(removeUser(res.data));
-          return res.data;
-        })
-        .catch(() => {});
+      return await api.deleteUser(user).then((res) => {
+        dispatch(removeUser(res.data));
+        return res.data;
+      });
     },
     [dispatch, api],
   );
 
-  return { fetchUsers: fetch, addUser: add, updateUser: update, removeUser: remove };
+  return { fetchUsers: fetch, getUser: get, addUser: add, updateUser: update, removeUser: remove };
 };
