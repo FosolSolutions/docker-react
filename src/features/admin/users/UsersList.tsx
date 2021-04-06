@@ -91,6 +91,7 @@ const UserGridStyled = styled('div')`
   padding: 10px 10% 10px 10%;
   justify-items: stretch;
   justify-self: start;
+  align-items: center;
   width: 100%;
 
   .table-title {

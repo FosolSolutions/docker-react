@@ -10,4 +10,5 @@ export interface IUser {
   isDisabled: boolean;
   roles?: IUserRole[];
   rowVersion?: string;
+  [propName: string]: any;
 }

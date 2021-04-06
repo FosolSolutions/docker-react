@@ -33,7 +33,6 @@ export const updateItem = <T>(items: T[], item: T, compare: (item: T) => boolean
   const _item = { ...item };
   const index = items.findIndex((i) => compare(i));
   if (index === -1) throw new NotFoundError();
-  items = items.slice(index);
   items[index] = _item;
   return _item;
 };
