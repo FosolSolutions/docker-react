@@ -3,6 +3,28 @@ import { useAppSelector } from 'store';
 import styled from 'styled-components';
 import loader from '../content/loader.svg';
 
+interface OverlayProps {
+  message?: string;
+}
+
+/**
+ * An overlay for the page which can display a specified message.
+ * @param {Object} param0 Component props.
+ * @param {string} [param0.message]
+ * @returns React component.
+ */
+export const Overlay = ({ message }: OverlayProps) => {
+  const app = useAppSelector((state) => state.app);
+
+  return app.loading ? (
+    <PageOverlay>
+      <Message>{message}</Message>
+    </PageOverlay>
+  ) : null;
+};
+
+export default Overlay;
+
 const PageOverlay = styled('div')`
   background-color: black;
   opacity: 0.25;
@@ -24,19 +46,3 @@ const PageOverlay = styled('div')`
 const Message = styled('p')`
   color: white;
 `;
-
-interface OverlayProps {
-  message?: string;
-}
-
-export const Overlay = ({ message }: OverlayProps) => {
-  const app = useAppSelector((state) => state.app);
-
-  return app.loading ? (
-    <PageOverlay>
-      <Message>{message}</Message>
-    </PageOverlay>
-  ) : null;
-};
-
-export default Overlay;

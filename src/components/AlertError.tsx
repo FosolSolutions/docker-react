@@ -4,6 +4,10 @@ import Badge from 'react-bootstrap/esm/Badge';
 import { useAppSelector, useAppDispatch, clearError } from 'store';
 import styled from 'styled-components';
 
+/**
+ * Displays error messages in the redux store in an alert dialog.
+ * @returns Error alert component.
+ */
 export const AlertError = () => {
   const state = useAppSelector((state) => state.app);
   const dispatch = useAppDispatch();

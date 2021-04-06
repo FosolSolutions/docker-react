@@ -6,6 +6,10 @@ interface IEditUserRouteParams {
   id?: string;
 }
 
+/**
+ * Annoying component to extract react router route params.
+ * @returns Component
+ */
 export const EditUserRoute = () => {
   const { id } = useParams<IEditUserRouteParams>();
 

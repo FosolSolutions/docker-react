@@ -6,6 +6,10 @@ import { RolesList } from 'features/admin/roles';
 import { Overlay } from '..';
 import EditUserRoute from './EditUserRoute';
 
+/**
+ * Application react router to control SPA.
+ * @returns Router component.
+ */
 export const AppRouter = () => {
   return (
     <Router>

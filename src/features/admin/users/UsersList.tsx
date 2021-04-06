@@ -5,6 +5,7 @@ import { useTable } from 'react-table';
 import { useColumns } from './useColumns';
 import styled from 'styled-components';
 
+// Fake user to add when the button is clicked.
 const user: IUser = {
   id: 1,
   key: 'key',
@@ -17,7 +18,7 @@ const user: IUser = {
 
 /**
  * UsersList component provides a way to view a list of users.
- * @returns Users list component.
+ * @returns React component.
  */
 export const UsersList = () => {
   const { fetchUsers, addUser } = useUsers();

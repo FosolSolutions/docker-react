@@ -3,10 +3,6 @@ import Button from 'react-bootstrap/esm/Button';
 import { IUser, useUsers } from 'store';
 import styled from 'styled-components';
 
-interface IEditUserProps {
-  id?: number;
-}
-
 const defaultUser: IUser = {
   id: 0,
   key: '',
@@ -17,11 +13,21 @@ const defaultUser: IUser = {
   isDisabled: false,
 };
 
+interface IEditUserProps {
+  id?: number;
+}
+
 interface IFormState {
   user: IUser;
   original: IUser;
 }
 
+/**
+ * A user info form to edit user data.
+ * @param param0 Component properties.
+ * @param param0.id The user 'id'.
+ * @returns React component.
+ */
 export const UserInfo = ({ id }: IEditUserProps) => {
   const { getUser, updateUser } = useUsers();
   const [editable, setEditable] = React.useState(false);
