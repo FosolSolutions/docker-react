@@ -9,6 +9,5 @@ export interface IUser {
   lastName: string;
   isDisabled: boolean;
   roles?: IUserRole[];
-  rowVersion?: string;
-  [propName: string]: any;
+  rowVersion?: string | null;
 }

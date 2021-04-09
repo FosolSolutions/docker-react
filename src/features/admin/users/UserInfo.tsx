@@ -1,7 +1,8 @@
 import React from 'react';
-import Button from 'react-bootstrap/esm/Button';
 import { IUser, useUsers } from 'store';
 import styled from 'styled-components';
+import { Form, Field } from 'components';
+import { useFormik, FormikProvider } from 'formik';
 
 const defaultUser: IUser = {
   id: 0,
@@ -17,11 +18,6 @@ interface IEditUserProps {
   id?: number;
 }
 
-interface IFormState {
-  user: IUser;
-  original: IUser;
-}
-
 /**
  * A user info form to edit user data.
  * @param param0 Component properties.
@@ -30,114 +26,82 @@ interface IFormState {
  */
 export const UserInfo = ({ id }: IEditUserProps) => {
   const { getUser, updateUser } = useUsers();
-  const [editable, setEditable] = React.useState(false);
-  const [state, setState] = React.useState<IFormState>({
-    user: { ...defaultUser },
-    original: { ...defaultUser },
+  const formik = useFormik<IUser>({
+    initialValues: defaultUser,
+    onSubmit: (values: IUser) => {
+      updateUser(values)
+        .then((user) => {
+          formik.setValues({ ...user });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    validate: (values) => {
+      const errors: any = {};
+      if (!values.username) errors.username = 'Required';
+      return errors;
+    },
   });
+  const { setValues } = formik;
 
   React.useEffect(() => {
     if (id) {
       getUser(id)
         .then((user) => {
-          setState({ user, original: user });
+          setValues({ ...user });
         })
         .catch(() => {});
     }
-  }, [getUser, id]);
-
-  const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setState((state) => {
-      switch (e.target.name) {
-        case 'username':
-          return { ...state, user: { ...state.user, username: e.target.value } };
-        case 'email':
-          return { ...state, user: { ...state.user, email: e.target.value } };
-        case 'firstName':
-          return { ...state, user: { ...state.user, firstName: e.target.value } };
-        case 'lastName':
-          return { ...state, user: { ...state.user, lastName: e.target.value } };
-      }
-      return state;
-    });
-  };
-
-  const onClickEdit = () => {
-    setEditable(true);
-  };
-
-  const onClickCancel = () => {
-    setEditable(false);
-    setState({ ...state, user: { ...state.original } });
-  };
-
-  const onClickSave = () => {
-    setEditable(false);
-    updateUser(state.user).then((user) => {
-      setState({ ...state, user: { ...user }, original: { ...user } });
-    });
-  };
+  }, [getUser, id, setValues]);
 
   return (
     <UserFormStyled>
-      <form>
-        <InputStyled>
-          <label htmlFor="username">Username:</label>{' '}
-          <input
-            type="text"
-            name="username"
-            value={state.user.username}
-            onChange={onValueChange}
-            disabled={!editable}
-          />
-        </InputStyled>
-        <InputStyled>
-          <label htmlFor="email">Email:</label>{' '}
-          <input
-            type="text"
-            name="email"
-            value={state.user.email}
-            onChange={onValueChange}
-            disabled={!editable}
-          />
-        </InputStyled>
-        <InputStyled>
-          <label htmlFor="firstName">First Name:</label>{' '}
-          <input
-            type="text"
-            name="firstName"
-            value={state.user.firstName}
-            onChange={onValueChange}
-            disabled={!editable}
-          />
-        </InputStyled>
-        <InputStyled>
-          <label htmlFor="lastName">Last Name:</label>{' '}
-          <input
-            type="text"
-            name="lastName"
-            value={state.user.lastName}
-            onChange={onValueChange}
-            disabled={!editable}
-          />
-        </InputStyled>
-      </form>
-      <div className="actions">
-        {editable ? (
-          <>
-            <Button variant="secondary" onClick={onClickCancel}>
-              Cancel
-            </Button>
-            <Button variant="primary" onClick={onClickSave}>
-              Save
-            </Button>
-          </>
-        ) : (
-          <Button variant="primary" onClick={onClickEdit}>
-            Edit
-          </Button>
-        )}
-      </div>
+      <FormikProvider value={formik}>
+        <Form<IUser> disabled={true}>
+          <Field name="username" label="Username" />
+          <InputStyled>
+            <label htmlFor="email">Email:</label>{' '}
+            <input
+              type="text"
+              name="email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              disabled={formik.isSubmitting}
+            />
+          </InputStyled>
+          <InputStyled>
+            <label htmlFor="firstName">First Name:</label>{' '}
+            <input
+              type="text"
+              name="firstName"
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+              disabled={formik.isSubmitting}
+            />
+          </InputStyled>
+          <InputStyled>
+            <label htmlFor="lastName">Last Name:</label>{' '}
+            <input
+              type="text"
+              name="lastName"
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              disabled={formik.isSubmitting}
+            />
+          </InputStyled>
+          <InputStyled>
+            <label htmlFor="isDisabled">Disabled:</label>{' '}
+            <input
+              type="checkbox"
+              name="isDisabled"
+              checked={formik.values.isDisabled}
+              onChange={formik.handleChange}
+              disabled={formik.isSubmitting}
+            />
+          </InputStyled>
+        </Form>
+      </FormikProvider>
     </UserFormStyled>
   );
 };

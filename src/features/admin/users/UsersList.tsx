@@ -108,7 +108,7 @@ const UserGridStyled = styled('div')`
     grid-area: table;
     grid-column: 1 / span 3;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     justify-content: stretch;
     justify-items: stretch;
@@ -137,6 +137,10 @@ const UserGridStyled = styled('div')`
     }
 
     .c-4 {
+      justify-items: center;
+    }
+
+    .c-5 {
       justify-items: end;
     }
   }

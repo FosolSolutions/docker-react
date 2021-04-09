@@ -1,6 +1,5 @@
 import React from 'react';
-import { IUser } from 'store';
-import { useApi } from '.';
+import { useApi, IUser } from '.';
 
 /**
  * Provides all api endpoints for admin users.

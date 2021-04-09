@@ -23,7 +23,6 @@ export const useColumns = () => {
         {
           Header: 'Email',
           accessor: 'email',
-          minWidth: 200,
         },
         {
           Header: 'Last Name',
@@ -32,6 +31,10 @@ export const useColumns = () => {
         {
           Header: 'First Name',
           accessor: 'firstName',
+        },
+        {
+          Header: 'Disabled',
+          accessor: (c) => c.isDisabled && 'yes',
         },
         {
           Header: '',
