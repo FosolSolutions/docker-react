@@ -1,8 +1,7 @@
 import React from 'react';
 import { IUser, useUsers } from 'store';
 import styled from 'styled-components';
-import { Form, Field } from 'components';
-import { useFormik, FormikProvider } from 'formik';
+import { useFormikForm, FormikForm } from 'components';
 
 const defaultUser: IUser = {
   id: 0,
@@ -26,7 +25,7 @@ interface IEditUserProps {
  */
 export const UserInfo = ({ id }: IEditUserProps) => {
   const { getUser, updateUser } = useUsers();
-  const formik = useFormik<IUser>({
+  const formik = useFormikForm<IUser>({
     initialValues: defaultUser,
     onSubmit: (values: IUser) => {
       updateUser(values)
@@ -43,65 +42,73 @@ export const UserInfo = ({ id }: IEditUserProps) => {
       return errors;
     },
   });
-  const { setValues } = formik;
+  const { setResetValues } = formik;
 
   React.useEffect(() => {
     if (id) {
       getUser(id)
         .then((user) => {
-          setValues({ ...user });
+          setResetValues({ ...user });
         })
         .catch(() => {});
     }
-  }, [getUser, id, setValues]);
+  }, [getUser, id, setResetValues]);
 
   return (
     <UserFormStyled>
-      <FormikProvider value={formik}>
-        <Form<IUser> disabled={true}>
-          <Field name="username" label="Username" />
-          <InputStyled>
-            <label htmlFor="email">Email:</label>{' '}
-            <input
-              type="text"
-              name="email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              disabled={formik.isSubmitting}
-            />
-          </InputStyled>
-          <InputStyled>
-            <label htmlFor="firstName">First Name:</label>{' '}
-            <input
-              type="text"
-              name="firstName"
-              value={formik.values.firstName}
-              onChange={formik.handleChange}
-              disabled={formik.isSubmitting}
-            />
-          </InputStyled>
-          <InputStyled>
-            <label htmlFor="lastName">Last Name:</label>{' '}
-            <input
-              type="text"
-              name="lastName"
-              value={formik.values.lastName}
-              onChange={formik.handleChange}
-              disabled={formik.isSubmitting}
-            />
-          </InputStyled>
-          <InputStyled>
-            <label htmlFor="isDisabled">Disabled:</label>{' '}
-            <input
-              type="checkbox"
-              name="isDisabled"
-              checked={formik.values.isDisabled}
-              onChange={formik.handleChange}
-              disabled={formik.isSubmitting}
-            />
-          </InputStyled>
-        </Form>
-      </FormikProvider>
+      <FormikForm<IUser> formik={formik} disabled={true}>
+        {/* <Field name="username" label="Username" /> */}
+        <InputStyled>
+          <label htmlFor="username">Username:</label>{' '}
+          <input
+            type="text"
+            name="username"
+            value={formik.values.username}
+            onChange={formik.handleChange}
+            disabled={formik.isSubmitting}
+          />
+        </InputStyled>
+        <InputStyled>
+          <label htmlFor="email">Email:</label>{' '}
+          <input
+            type="text"
+            name="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            disabled={formik.isSubmitting}
+          />
+        </InputStyled>
+        <InputStyled>
+          <label htmlFor="firstName">First Name:</label>{' '}
+          <input
+            type="text"
+            name="firstName"
+            value={formik.values.firstName}
+            onChange={formik.handleChange}
+            disabled={formik.isSubmitting}
+          />
+        </InputStyled>
+        <InputStyled>
+          <label htmlFor="lastName">Last Name:</label>{' '}
+          <input
+            type="text"
+            name="lastName"
+            value={formik.values.lastName}
+            onChange={formik.handleChange}
+            disabled={formik.isSubmitting}
+          />
+        </InputStyled>
+        <InputStyled>
+          <label htmlFor="isDisabled">Disabled:</label>{' '}
+          <input
+            type="checkbox"
+            name="isDisabled"
+            checked={formik.values.isDisabled}
+            onChange={formik.handleChange}
+            disabled={formik.isSubmitting}
+          />
+        </InputStyled>
+      </FormikForm>
     </UserFormStyled>
   );
 };

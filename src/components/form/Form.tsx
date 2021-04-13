@@ -1,7 +1,7 @@
 import React from 'react';
-import { useFormikContext } from 'formik';
+import { useFormikFormContext } from '.';
 
-interface IFormProps extends React.PropsWithChildren<any> {
+export interface IFormProps extends React.PropsWithChildren<any> {
   submitLabel?: string;
   cancelLabel?: string;
   editLabel?: string;
@@ -9,28 +9,33 @@ interface IFormProps extends React.PropsWithChildren<any> {
   disabled?: boolean;
 }
 
+export interface IFormConfigProps extends IFormProps {}
+
 /**
- *
+ * A Form component that supports;
+ * - enabling/disabling form edits
+ * - cancelling any edits currently made
+ * - submit button
  * @param param0
  * @returns
  */
-export const Form = <T,>({
+export const Form = <Values,>({
   submitLabel = 'Submit',
   cancelLabel = 'Cancel',
   editLabel = 'Edit',
   editable = true,
   disabled = false,
   ...props
-}: IFormProps) => {
-  const formik = useFormikContext<T>();
+}: IFormConfigProps) => {
+  const formik = useFormikFormContext<Values>();
   const [isDisabled, setIsDisabled] = React.useState(disabled);
-  const [original, setOriginal] = React.useState(formik.values);
+  const { handleReset, setResetValues } = formik;
 
   const handleSubmit = async (e?: React.FormEvent<HTMLFormElement> | undefined) => {
     e?.preventDefault();
     try {
       await formik.submitForm();
-      setOriginal(formik.values);
+      setResetValues(formik.values);
     } catch (error) {
       console.error(error); // TODO: add to state to display error message.
     } finally {
@@ -43,7 +48,7 @@ export const Form = <T,>({
   };
 
   const onCancelClick = () => {
-    formik.setValues(original);
+    handleReset();
   };
 
   return (
