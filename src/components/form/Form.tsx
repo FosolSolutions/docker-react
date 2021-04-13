@@ -5,8 +5,6 @@ export interface IFormProps extends React.PropsWithChildren<any> {
   submitLabel?: string;
   cancelLabel?: string;
   editLabel?: string;
-  editable?: boolean;
-  disabled?: boolean;
 }
 
 export interface IFormConfigProps extends IFormProps {}
@@ -23,13 +21,10 @@ export const Form = <Values,>({
   submitLabel = 'Submit',
   cancelLabel = 'Cancel',
   editLabel = 'Edit',
-  editable = true,
-  disabled = false,
   ...props
 }: IFormConfigProps) => {
   const formik = useFormikFormContext<Values>();
-  const [isDisabled, setIsDisabled] = React.useState(disabled);
-  const { handleReset, setResetValues } = formik;
+  const { handleReset, setResetValues, disabled, setDisabled, editable } = formik;
 
   const handleSubmit = async (e?: React.FormEvent<HTMLFormElement> | undefined) => {
     e?.preventDefault();
@@ -44,29 +39,34 @@ export const Form = <Values,>({
   };
 
   const onEditClick = () => {
-    setIsDisabled(false);
+    setDisabled(false);
   };
 
   const onCancelClick = () => {
     handleReset();
+    setDisabled(true);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       {props.children}
       <div className="actions">
-        {editable && !isDisabled && (
+        {editable && !disabled && (
           <>
-            <button type="button" onClick={onCancelClick}>
+            <button type="button" onClick={onCancelClick} className="btn btn-secondary">
               {cancelLabel}
             </button>
-            <button type="submit" disabled={formik.isSubmitting || isDisabled}>
+            <button
+              type="submit"
+              disabled={formik.isSubmitting || disabled}
+              className="btn btn-primary"
+            >
               {submitLabel}
             </button>
           </>
         )}
-        {editable && isDisabled && (
-          <button type="button" onClick={onEditClick}>
+        {editable && disabled && (
+          <button type="button" onClick={onEditClick} className="btn btn-primary">
             {editLabel}
           </button>
         )}

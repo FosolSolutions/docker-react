@@ -9,6 +9,8 @@ export const useFormikForm = <Values>(
 ): IFormikFormContextType<Values> => {
   const formik = useFormik(config);
   const [resetValues, _setResetValues] = React.useState<Values>(formik.values);
+  const [disabled, setDisabled] = React.useState(true);
+  const [editable, setEditable] = React.useState(true);
   const { setValues } = formik;
 
   /**
@@ -23,6 +25,9 @@ export const useFormikForm = <Values>(
     [_setResetValues, setValues],
   );
 
+  /**
+   * When the reset is triggered it will call this function to update the formik values to the original reset values.
+   */
   const handleReset = React.useCallback(() => {
     setValues(resetValues);
   }, [resetValues, setValues]);
@@ -31,6 +36,10 @@ export const useFormikForm = <Values>(
     ...formik,
     setResetValues,
     handleReset,
+    disabled,
+    setDisabled,
+    editable,
+    setEditable,
   };
 };
 

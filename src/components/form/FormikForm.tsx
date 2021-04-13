@@ -1,5 +1,6 @@
 import React from 'react';
 import { IFormProps, Form, FormikFormProvider, IFormikFormContextType } from '.';
+import { FormikProvider } from 'formik';
 
 export interface IFormikFormProps<Values> extends IFormProps {
   formik: IFormikFormContextType<Values>;
@@ -12,9 +13,11 @@ export interface IFormikFormProps<Values> extends IFormProps {
  */
 export const FormikForm = <Values,>({ formik, ...props }: IFormikFormProps<Values>) => {
   return (
-    <FormikFormProvider value={formik}>
-      <Form {...props}></Form>
-    </FormikFormProvider>
+    <FormikProvider value={formik}>
+      <FormikFormProvider value={formik}>
+        <Form {...props}></Form>
+      </FormikFormProvider>
+    </FormikProvider>
   );
 };
 

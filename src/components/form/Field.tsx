@@ -1,18 +1,21 @@
 import React from 'react';
-import { Field as AField, FieldAttributes } from 'formik';
+import { Field as FormikField, FieldAttributes } from 'formik';
 import styled from 'styled-components';
+import { useFormikFormContext } from '.';
 
 interface IFieldProps extends FieldAttributes<any> {
   label: string;
 }
 
-export const Field = ({ name, label, as, ...props }: IFieldProps) => {
+export const Field = ({ name, label, as, type, ...props }: IFieldProps) => {
+  const { disabled } = useFormikFormContext();
+
   return (
     <InputStyled>
       <label htmlFor={name}>{label}:</label>{' '}
-      <AField name={name} as={as}>
+      <FormikField name={name} as={as} type={type} disabled={disabled} className="form-control">
         {props.children}
-      </AField>
+      </FormikField>
     </InputStyled>
   );
 };
