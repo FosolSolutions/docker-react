@@ -1,29 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
-/**
- * Control the variant styling of the button.
- */
-export enum ButtonVariants {
-  Primary = 'primary',
-  Secondary = 'secondary',
-  Success = 'success',
-  Warning = 'warning',
-  Danger = 'danger',
-  Info = 'info',
-  Light = 'light',
-  Dark = 'dark',
-  Link = 'link',
-}
-
-/**
- * Control the size of the button.
- */
-export enum ButtonSizes {
-  Default = 'default',
-  Small = 'small',
-  Large = 'large',
-}
+import { ButtonVariants, ButtonSizes } from '.';
 
 export interface IButtonProps
   extends React.DetailedHTMLProps<
