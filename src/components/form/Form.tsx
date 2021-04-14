@@ -1,6 +1,6 @@
 import React from 'react';
-import { useFormikFormContext, Button } from '.';
-import { ButtonVariants } from '.';
+import { useFormikFormContext } from '.';
+import { ButtonVariants, Button } from 'components';
 
 export interface IFormProps extends React.PropsWithChildren<any> {
   submitLabel?: string;

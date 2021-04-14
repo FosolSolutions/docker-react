@@ -4,3 +4,4 @@ export * from './Footer';
 export * from './Overlay';
 export * from './AlertError';
 export * from './form';
+export * from './button';
