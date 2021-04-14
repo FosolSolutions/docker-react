@@ -1,5 +1,6 @@
 import React from 'react';
-import { useFormikFormContext } from '.';
+import { useFormikFormContext, Button } from '.';
+import { ButtonVariants } from './Button';
 
 export interface IFormProps extends React.PropsWithChildren<any> {
   submitLabel?: string;
@@ -53,22 +54,22 @@ export const Form = <Values,>({
       <div className="actions">
         {editable && !disabled && (
           <>
-            <button type="button" onClick={onCancelClick} className="btn btn-secondary">
+            <Button type="button" variant={ButtonVariants.Secondary} onClick={onCancelClick}>
               {cancelLabel}
-            </button>
-            <button
+            </Button>
+            <Button
               type="submit"
+              variant={ButtonVariants.Primary}
               disabled={formik.isSubmitting || disabled}
-              className="btn btn-primary"
             >
               {submitLabel}
-            </button>
+            </Button>
           </>
         )}
         {editable && disabled && (
-          <button type="button" onClick={onEditClick} className="btn btn-primary">
+          <Button type="button" variant={ButtonVariants.Primary} onClick={onEditClick}>
             {editLabel}
-          </button>
+          </Button>
         )}
       </div>
     </form>

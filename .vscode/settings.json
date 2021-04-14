@@ -14,11 +14,10 @@
   "eslint.alwaysShowStatus": true,
   "jest.pathToJest": "npm run test:watch --",
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "eslint.workingDirectories": ["./"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
   "git.ignoreLimitWarning": true,
-  "cSpell.words": [
-    "formik"
-  ]
+  "cSpell.words": ["formik"]
 }
