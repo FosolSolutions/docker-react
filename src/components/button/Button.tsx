@@ -24,7 +24,7 @@ export interface IButtonProps
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const BaseButton = ({ disabled, inverted, variant, size, ...rest }: IButtonProps) => {
-  return <button {...rest}></button>;
+  return <button {...{ ...rest, className: `${rest.className} btn` }}></button>;
 };
 
 /**

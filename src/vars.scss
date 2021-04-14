@@ -1,3 +1,11 @@
+$baseRadius: 5px;
+$baseFontSize: 12pt;
+$fontSemibold: 500;
+
+// Inputs
+$inputBackgroundColor: #fff;
+$inputBackgroundColorReadonly: #e9ecef;
+
 // Buttons
 $primaryBackground: #007bff;
 $primaryBorder: #007bff;
@@ -61,7 +69,3 @@ $linkColor: #007bff;
 $linkBackgroundHover: none;
 $linkBorderHover: none;
 $linkColorHover: #0056b3;
-
-$baseRadius: 5px;
-$baseFontSize: 12pt;
-$fontSemibold: 500;
