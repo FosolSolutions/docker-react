@@ -4,15 +4,21 @@ import styled from 'styled-components';
 import { useFormikFormContext } from '.';
 
 interface IFieldProps extends FieldAttributes<any> {
-  label: string;
+  // The label to display beside the input.
+  label?: string;
 }
 
+/**
+ * A consistent way to present a label with an input field.
+ * @param param0 Field component properties.
+ * @returns Field component.
+ */
 export const Field = ({ name, label, as, type, ...props }: IFieldProps) => {
   const { disabled } = useFormikFormContext();
 
   return (
     <FieldStyled className={`${props.className} form-field`}>
-      <label htmlFor={name}>{label}:</label>
+      {label && <label htmlFor={name}>{label}:</label>}
       <InputStyled name={name} as={as} type={type} disabled={disabled}>
         {props.children}
       </InputStyled>
