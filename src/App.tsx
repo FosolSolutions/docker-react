@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppRouter, Header, Footer, AlertError } from './components';
+import { AppNav, Header, Footer, AlertError } from './components';
 import { ThemeProvider } from 'styled-components';
 import './App.css';
 
@@ -11,7 +11,7 @@ export const App = () => {
       <div className="App">
         <AlertError />
         <Header />
-        <AppRouter />
+        <AppNav />
         <Footer />
       </div>
     </ThemeProvider>

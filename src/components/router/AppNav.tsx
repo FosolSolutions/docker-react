@@ -1,37 +1,22 @@
 import React from 'react';
-import { Nav } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { UsersList, UserInfo } from 'features/admin/users';
 import { RolesList } from 'features/admin/roles';
-import { Overlay } from '..';
+import { Overlay, Nav } from '..';
 import EditUserRoute from './EditUserRoute';
 
 /**
  * Application react router to control SPA.
  * @returns Router component.
  */
-export const AppRouter = () => {
+export const AppNav = () => {
   return (
     <Router>
-      <nav>
-        <Nav activeKey="/home">
-          <Nav.Item>
-            <Nav.Link as={Link} to="/">
-              Home
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link as={Link} to="/admin/users">
-              Users
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link as={Link} to="/admin/roles">
-              Roles
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
-      </nav>
+      <Nav>
+        <Link to="/">Home</Link>
+        <Link to="/admin/users">Users</Link>
+        <Link to="/admin/roles">Roles</Link>
+      </Nav>
       <main>
         <Overlay message="Content is being loaded"></Overlay>
         <Switch>
@@ -48,4 +33,4 @@ export const AppRouter = () => {
   );
 };
 
-export default AppRouter;
+export default AppNav;

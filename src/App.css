@@ -16,13 +16,6 @@
   color: white;
 }
 
-.App nav {
-  display: flex;
-  align-items: flex-start;
-  background-color: aliceblue;
-  justify-content: center;
-}
-
 .App main {
   display: flex;
   justify-content: normal;
