@@ -1,5 +1,4 @@
 import React from 'react';
-import Col from 'react-bootstrap/esm/Col';
 import { useAppDispatch, IRole, removeRole } from 'store';
 
 interface IRoleColumnsProps {
@@ -21,12 +20,12 @@ export const RoleColumns: React.FC<IRoleColumnsProps> = ({ role }: IRoleColumnsP
 
   return (
     <>
-      <Col>{role.name}</Col>
-      <Col>
+      <div>{role.name}</div>
+      <div>
         <a href="void" onClick={(e) => onRemove(e, role.id)}>
           remove
         </a>
-      </Col>
+      </div>
     </>
   );
 };

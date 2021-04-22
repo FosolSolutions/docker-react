@@ -1,10 +1,7 @@
+import { Button } from 'components';
 import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
 import { useAppSelector, useAppDispatch, addRole, IRole } from 'store';
 import { RoleRows } from './RoleRows';
-import Row from 'react-bootstrap/esm/Row';
-import Col from 'react-bootstrap/esm/Col';
 
 const role: IRole = {
   id: 1,
@@ -27,25 +24,25 @@ export const RolesList = () => {
   };
 
   return (
-    <Container>
-      <Row>
-        <Col>
+    <div>
+      <div>
+        <div>
           <h1>Roles</h1>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
+        </div>
+      </div>
+      <div>
+        <div>
           <Button onClick={onAdd}>Add</Button>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Container className="table">
+        </div>
+      </div>
+      <div>
+        <div>
+          <div className="table">
             <RoleRows roles={rolesStore.roles} />
-          </Container>
-        </Col>
-      </Row>
-    </Container>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -9,7 +9,7 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <AlertError />
+        <AlertError variant="danger" />
         <Header />
         <AppNav />
         <Footer />

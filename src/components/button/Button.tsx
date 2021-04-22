@@ -27,16 +27,20 @@ export const BaseButton = ({ disabled, inverted, variant, size, ...rest }: IButt
   return <button {...{ ...rest, className: `${rest.className} btn` }}></button>;
 };
 
+const getStyle = (props: any, style: any[]) => {
+  return style[props.variant?.toString() ?? 'secondary'];
+};
+
 /**
  * A button that is styled like Bootstrap.
  */
 export const Button = styled(BaseButton)`
-  --border: ${(props) => props.theme[`${props.variant}Border`]};
-  --background: ${(props) => props.theme[`${props.variant}Background`]};
-  --color: ${(props) => props.theme[`${props.variant}Color`]};
-  --borderHover: ${(props) => props.theme[`${props.variant}BorderHover`]};
-  --backgroundHover: ${(props) => props.theme[`${props.variant}BackgroundHover`]};
-  --colorHover: ${(props) => props.theme[`${props.variant}ColorHover`]};
+  --border: ${(props) => getStyle(props, props.theme.buttonBorder)};
+  --background: ${(props) => getStyle(props, props.theme.buttonBackground)};
+  --color: ${(props) => getStyle(props, props.theme.buttonColor)};
+  --borderHover: ${(props) => getStyle(props, props.theme.buttonBorderHover)};
+  --backgroundHover: ${(props) => getStyle(props, props.theme.buttonBackgroundHover)};
+  --colorHover: ${(props) => getStyle(props, props.theme.buttonColorHover)};
   border: ${(props) => (props.inverted ? `1px solid var(--border)` : '1px solid rgba(0,0,0,0)')};
   border-radius: ${(props) => props.theme.baseRadius};
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};

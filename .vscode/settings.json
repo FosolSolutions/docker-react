@@ -19,5 +19,5 @@
     "source.fixAll.eslint": true
   },
   "git.ignoreLimitWarning": true,
-  "cSpell.words": ["formik"]
+  "cSpell.words": ["formik", "fosol"]
 }

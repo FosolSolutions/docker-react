@@ -1,9 +1,9 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import { useAppSelector, IUser, useUsers } from 'store';
 import { useTable } from 'react-table';
 import { useColumns } from './useColumns';
 import styled from 'styled-components';
+import { Button } from 'components';
 
 // Fake user to add when the button is clicked.
 const user: IUser = {

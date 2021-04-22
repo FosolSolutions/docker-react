@@ -7,65 +7,101 @@ $inputBackgroundColor: #fff;
 $inputBackgroundColorReadonly: #e9ecef;
 
 // Buttons
-$primaryBackground: #007bff;
-$primaryBorder: #007bff;
-$primaryColor: #fff;
-$primaryBackgroundHover: #0069d9;
-$primaryBorderHover: #0062cc;
-$primaryColorHover: #fff;
+$buttonColor: (
+  'primary': #fff,
+  'secondary': #fff,
+  'success': #fff,
+  'danger': #fff,
+  'warning': #fff,
+  'info': #fff,
+  'light': #212529,
+  'dark': #fff,
+  'link': #007bff,
+);
+$buttonBackground: (
+  'primary': #007bff,
+  'secondary': #6c757d,
+  'success': #28a745,
+  'danger': #dc3545,
+  'warning': #ffc107,
+  'info': #17a2b8,
+  'light': #f8f9fa,
+  'dark': #343a40,
+  'link': none,
+);
+$buttonBorder: (
+  'primary': #007bff,
+  'secondary': #6c757d,
+  'success': #28a745,
+  'danger': #dc3545,
+  'warning': #ffc107,
+  'info': #17a2b8,
+  'light': #f8f9fa,
+  'dark': #343a40,
+  'link': none,
+);
+$buttonColorHover: (
+  'primary': #fff,
+  'secondary': #fff,
+  'success': #fff,
+  'danger': #fff,
+  'warning': #fff,
+  'info': #fff,
+  'light': #212529,
+  'dark': #fff,
+  'link': #0056b3,
+);
+$buttonBackgroundHover: (
+  'primary': #0069d9,
+  'secondary': #5a6268,
+  'success': #218838,
+  'danger': #c82333,
+  'warning': #e0a800,
+  'info': #138496,
+  'light': #e2e6ea,
+  'dark': #23272b,
+  'link': none,
+);
+$buttonBorderHover: (
+  'primary': #0062cc,
+  'secondary': #545b62,
+  'success': #1e7e34,
+  'danger': #bd2130,
+  'warning': #d39e00,
+  'info': #117a8b,
+  'light': #dae0e5,
+  'dark': #1d2124,
+  'link': none,
+);
 
-$secondaryBackground: #6c757d;
-$secondaryBorder: #6c757d;
-$secondaryColor: #fff;
-$secondaryBackgroundHover: #5a6268;
-$secondaryBorderHover: #545b62;
-$secondaryColorHover: #fff;
-
-$successBackground: #28a745;
-$successBorder: #28a745;
-$successColor: #fff;
-$successBackgroundHover: #218838;
-$successBorderHover: #1e7e34;
-$successColorHover: #fff;
-
-$warningBackground: #ffc107;
-$warningBorder: #ffc107;
-$warningColor: #fff;
-$warningBackgroundHover: #e0a800;
-$warningBorderHover: #d39e00;
-$warningColorHover: #fff;
-
-$dangerBackground: #dc3545;
-$dangerBorder: #dc3545;
-$dangerColor: #fff;
-$dangerBackgroundHover: #c82333;
-$dangerBorderHover: #bd2130;
-$dangerColorHover: #fff;
-
-$infoBackground: #17a2b8;
-$infoBorder: #17a2b8;
-$infoColor: #fff;
-$infoBackgroundHover: #138496;
-$infoBorderHover: #117a8b;
-$infoColorHover: #fff;
-
-$lightBackground: #f8f9fa;
-$lightBorder: #f8f9fa;
-$lightColor: #212529;
-$lightBackgroundHover: #e2e6ea;
-$lightBorderHover: #dae0e5;
-$lightColorHover: #212529;
-
-$darkBackground: #343a40;
-$darkBorder: #343a40;
-$darkColor: #fff;
-$darkBackgroundHover: #23272b;
-$darkBorderHover: #1d2124;
-$darkColorHover: #fff;
-
-$linkBackground: none;
-$linkBorder: none;
-$linkColor: #007bff;
-$linkBackgroundHover: none;
-$linkBorderHover: none;
-$linkColorHover: #0056b3;
+// Alerts
+$alertColor: (
+  'primary': #004085,
+  'secondary': #383d41,
+  'success': #155724,
+  'danger': #721c24,
+  'warning': #856404,
+  'info': #0c5460,
+  'light': #818182,
+  'dark': #1b1e21,
+);
+$alertBackground: (
+  'primary': #e2e3e5,
+  'secondary': #e2e3e5,
+  'success': #d4edda,
+  'danger': #f8d7da,
+  'warning': #fff3cd,
+  'info': #d1ecf1,
+  'light': #fefefe,
+  'dark': #d6d8d9,
+);
+$alertBorder: (
+  'primary': #b8daff,
+  'secondary': #d6d8db,
+  'success': #c3e6cb,
+  'danger': #f5c6cb,
+  'warning': #ffeeba,
+  'info': #bee5eb,
+  'light': #fdfdfe,
+  'dark': #c6c8ca,
+);

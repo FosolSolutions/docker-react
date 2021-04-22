@@ -50,3 +50,5 @@ To enable overriding, components should use a standardized class naming conventi
 This will allow custom CSS to override through specificity, as this will ensure the last name applied to the class is the custom name.
 
 Global variables through themes are supported.
+
+More information [here](https://medium.com/styled-components/getting-sassy-with-sass-styled-theme-9a375cfb78e8)
