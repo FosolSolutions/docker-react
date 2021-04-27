@@ -1,0 +1,149 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: elasticsearch
+  labels:
+    app: elasticsearch
+spec:
+  ports:
+    - name: client
+      protocol: TCP
+      port: 9200
+      targetPort: 9200
+    - name: transport
+      protocol: TCP
+      port: 9300
+      targetPort: 9300
+  selector:
+    app: elasticsearch
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: elasticsearch
+  labels:
+    app: elasticsearch
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: elasticsearch
+                port:
+                  number: 9200
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: elasticsearch
+  labels:
+    app: elasticsearch
+data:
+  elasticsearch.yml: |-
+    xpack.security.enabled: true
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: elasticsearch
+  annotations:
+    description: 'Elasticsearch bootstrap password'
+  labels:
+    app: elasticsearch
+type: Opaque
+stringData:
+  ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: elasticsearch
+  labels:
+    type: server
+spec:
+  storageClassName: standard-file
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 20Gi
+  hostPath:
+    path: /svr/pv/elasticsearch
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: elasticsearch
+  labels:
+    app: elasticsearch
+spec:
+  storageClassName: standard-file
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  # volumeName: data
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticsearch
+  labels:
+    app: elasticsearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      containers:
+        - name: elasticsearch
+          image: docker.elastic.co/elasticsearch/elasticsearch:7.12.0
+          env:
+            - name: discovery.type
+              value: single-node
+            - name: network.host
+              value: '0.0.0.0'
+            - name: 'ES_JAVA_OPTS'
+              value: '-Xms256m -Xmx256m'
+            - name: ELASTIC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: elasticsearch
+                  key: ELASTIC_PASSWORD
+          ports:
+            - containerPort: 9300
+              name: transport
+            - containerPort: 9200
+              name: client
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 500m
+              memory: 500Mi
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
+              readOnly: true
+              subPath: elasticsearch.yml
+            - name: data
+              mountPath: /usr/share/elasticsearch/data
+      volumes:
+        - name: config-volume
+          configMap:
+            name: elasticsearch
+        - name: data
+          persistentVolumeClaim:
+            claimName: elasticsearch
